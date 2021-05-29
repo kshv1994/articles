@@ -1,0 +1,39 @@
+class UserDetail(models.Model):
+    """User Details"""
+    fname = models.CharField(max_length=255)
+    lname = models.CharField(max_length=255)
+
+
+class RewardCard(models.Model):
+    """Reward card Details"""
+    pid = models.CharField(max_length=255)
+    issue_date = models.DateField()
+
+
+class Store(models.Model):
+    """Store Details"""
+    code = models.CharField(max_length=255)
+    address = models.TextField()
+    
+    
+class Bill(models.Model):
+    """Bill Details"""
+    pid = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        UserDetail, related_name="user", on_delete=models.PROTECT
+    )
+    card = models.ForeignKey(
+        RewardCard, related_name="reward_card", on_delete=models.PROTECT
+    )
+    
+    
+class Transaction(models.Model):
+    """Transaction Details"""
+    pid = models.CharField(max_length=255)
+    bill = models.ForeignKey(
+        Bill, related_name="bill", on_delete=models.PROTECT
+    )
+    store = models.ForeignKey(
+        Store, related_name="store_details", on_delete=models.PROTECT
+    )
+    
