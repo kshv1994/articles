@@ -1,0 +1,4 @@
+username = ‘Batman’
+bill_qs = Bill.objects.filter(user__username=username)
+transaction_qs = Transaction.objects.filter(bill__in=bill_qs)
+print(transaction_qs.query)
