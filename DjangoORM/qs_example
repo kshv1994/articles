@@ -1,4 +1,12 @@
-username = ‘Batman’
-bill_qs = Bill.objects.filter(user__username=username)
-transaction_qs = Transaction.objects.filter(bill__in=bill_qs)
+username = 'batman'
+transaction_qs = Transaction.objects.filter(
+    bill__user__username=username
+ )
 print(transaction_qs.query)
+
+# # result
+# SELECT "first_app_transaction"."id", "first_app_transaction"."pid", "first_app_transaction"."bill_id", "first_app_transaction"."store_id"
+# FROM "first_app_transaction"
+# INNER JOIN "first_app_bill" ON ("first_app_transaction"."bill_id" = "first_app_bill"."id")
+# INNER JOIN "first_app_userdetail" ON ("first_app_bill"."user_id" = "first_app_userdetail"."id")
+# WHERE "first_app_userdetail"."username" = batman
