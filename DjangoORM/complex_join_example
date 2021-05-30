@@ -4,9 +4,9 @@ transaction_qs = Transaction.objects.filter(bill__in=bill_qs)
 print(transaction_qs.query)
 
 # # result
-# SELECT "first_app_transaction"."id", "first_app_transaction"."pid", "first_app_transaction"."bill_id", "first_app_transaction"."store_id"
-# FROM "first_app_transaction"
-# WHERE "first_app_transaction"."bill_id" IN (SELECT U0."id"
-#                                                 FROM "first_app_bill" U0
-#                                                 INNER JOIN "first_app_userdetail" U1 ON (U0."user_id" = U1."id")
+# SELECT "my_app_transaction"."id", "my_app_transaction"."pid", "my_app_transaction"."bill_id", "my_app_transaction"."store_id"
+# FROM "my_app_transaction"
+# WHERE "my_app_transaction"."bill_id" IN (SELECT U0."id"
+#                                                 FROM "my_app_bill" U0
+#                                                 INNER JOIN "my_app_userdetail" U1 ON (U0."user_id" = U1."id")
 #                                                 WHERE U1."username" = batman)
